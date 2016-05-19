@@ -2,7 +2,6 @@ const express = require('express');
 const app = express();
 const jwt = require('express-jwt');
 const cors = require('cors');
-const _ = require('lodash');
 
 app.use(cors());
 
@@ -47,21 +46,15 @@ var contacts = [
   }
 ];
 
-var contactMin = [];
-contacts.forEach(contact => {
-  contactMin.push(_.pick(contact, 'name'))
-});
-
 app.get('/api/contacts', (req, res) => {
-  var contactsMinimal = [];
-  contacts.forEach(contact => {
-    contactsMinimal.push(_.pick(contact, ['id', 'name']));
+  const allContacts = contacts.map(contact => { 
+    return { id: contact.id, name: contact.name}
   });
-  res.json(contactsMinimal);
+  res.json(allContacts);
 });
 
 app.get('/api/contacts/:id', authCheck, (req, res) => {
-  res.json(_.find(contacts, { id: parseInt(req.params.id) }));
+  res.json(contacts.filter(contact => contact.id === parseInt(req.params.id)));
 });
 
 app.listen(3001);
