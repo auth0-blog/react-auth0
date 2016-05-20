@@ -66,6 +66,7 @@
     "react": "^15.0.0",
     "react-bootstrap": "^0.29.4",
     "react-dom": "^15.0.0",
-    "react-router": "^2.4.0"
+    "react-router": "^2.4.0",
+    "superagent": "^2.0.0-alpha.3"
   }
 }
