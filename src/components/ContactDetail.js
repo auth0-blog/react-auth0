@@ -25,9 +25,7 @@ class ContactDetailComponent extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({
-      contact: ContactActions.getContact(nextProps.params.id)
-    });
+    ContactActions.getContact(nextProps.params.id);
   }
 
   onChange() {
@@ -37,12 +35,12 @@ class ContactDetailComponent extends Component {
   }
   render() {
     let contact;
-    if (this.state.contact) {
-      contact = this.state.contact;
+    if (Object.keys(this.state.contact).length != 0) {
+      contact = this.state.contact[0];
     }
     return (
       <div>
-        { this.state.contact &&
+        { Object.keys(this.state.contact).length != 0 &&
           <div>
             <img src={contact.image} width="150" />
             <h1>{contact.name}</h1>
